@@ -1,4 +1,3 @@
-
 import { useState,useEffect } from "react";
 import toast, { Toaster } from 'react-hot-toast';
 import { animateScroll as scroll } from 'react-scroll';
