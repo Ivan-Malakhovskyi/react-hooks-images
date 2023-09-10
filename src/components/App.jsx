@@ -19,6 +19,7 @@ export const App = () => {
   const [images, setImages] = useState([]);
   const [showLoadMoreButton, setShowLoadMoreButton] = useState(true);
   const [searchFailed, setSearchFailed] = useState(false);
+  const [isRequestCancelled, setIsRequestCancelled] = useState(false);
 
   const scrollToTop = () => {
     scroll.scrollToTop();
@@ -33,6 +34,7 @@ export const App = () => {
 
     const fetchImages = async () => {
       //* Якщо є попередній запит -> відмінити
+      setIsRequestCancelled(false);
 
       if (controller.current) {
         controller.current.abort();
@@ -78,12 +80,9 @@ export const App = () => {
         filteredNeedsValues();
         setShowLoadMoreButton(true);
       } catch (error) {
-        // console.log(error.message);
         if (error.code !== 'ERR_CANCELED') {
           setError(true);
         }
-
-        setError(true);
       } finally {
         setLoading(false);
       }
@@ -124,9 +123,9 @@ export const App = () => {
         </ErrorMsg>
       )}
 
-      {error && !loading && !controller && (
+      {error && !loading && !isRequestCancelled && (
         <ErrorMsg>
-          ❌ Something went wrong,try reload page{' '}
+          ❌ Something went wrong,try reload page
           {toast.error('Ooops, something went wrong')}
         </ErrorMsg>
       )}
