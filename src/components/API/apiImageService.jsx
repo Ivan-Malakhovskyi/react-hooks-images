@@ -14,12 +14,8 @@ export const serviceGallery = async (query, page, controller) => {
     page: page,
   });
 
-  //   try {
   const { data } = await axios.get(`?${params}`, {
     signal: controller.current.signal,
   });
   return data;
-  //   } catch (error) {
-  //     console.log(error.message);
-  //   }
 };

@@ -136,7 +136,7 @@ export const App = () => {
       <Toaster />
       <GlobalStyle />
 
-      {images.length > 0 && (
+      {images.length > 0 && window.scrollY !== 0 && (
         <BtnToTop type="button" onClick={scrollToTop}>
           To start
         </BtnToTop>

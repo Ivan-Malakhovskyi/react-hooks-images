@@ -1,6 +1,5 @@
-
 import Modal from 'react-modal';
-import { ImageGalleryItemImage,ImageItem } from './imageGallery.styled';
+import { ImageGalleryItemImage, ImageItem } from './imageGallery.styled';
 import { useState } from 'react';
 
 Modal.setAppElement('#root');
@@ -15,34 +14,29 @@ const customStyles = {
   },
 };
 
-export const ImageGalleryItem = (props) => {
+export const ImageGalleryItem = props => {
+  const { webformatURL, largeImageURL, tags, id } = props;
 
-  const { webformatURL, largeImageURL, tags, id } = props
-  
-  const [modalIsOpen, setModalIsOpen] = useState(false)
-  
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
   return (
-       
     <div>
-      
-      <ImageItem key={id} id={id} className="gallery-item" onClick={() => setModalIsOpen(true)}>
+      <ImageItem
+        key={id}
+        id={id}
+        className="gallery-item"
+        onClick={() => setModalIsOpen(true)}
+      >
         <ImageGalleryItemImage src={webformatURL} alt={tags} />
       </ImageItem>
-              
-     
+
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={() => setModalIsOpen(false)}
         style={customStyles}
-           
-    >
-      
-          <img src={largeImageURL} alt={tags} width={600} height={400}  />
-
+      >
+        <img src={largeImageURL} alt={tags} width={600} height={400} />
       </Modal>
     </div>
-  )
-}
-
-
-
+  );
+};
